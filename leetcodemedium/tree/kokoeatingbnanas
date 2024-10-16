@@ -1,0 +1,31 @@
+Input: piles = [3,6,7,11], h = 8
+Output: 4
+Example 2:
+Input: piles = [30,11,23,4,20], h = 5
+Output: 30
+Example 3:
+Input: piles = [30,11,23,4,20], h = 6
+Output: 23
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int min = 1;
+        int max=0;
+        for (int n : piles) if (max < n) max = n;
+        if (h == piles.length) return max;
+        while (min <= max) {
+            long tempH = 0; //this should be long very very important else it will give error
+            int mid = min + (max - min) / 2;
+            for (int n : piles) {
+                tempH += n/mid;
+                if (n%mid>0) tempH++;
+            }
+            if (tempH <= h) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        
+        return min;
+    }
+}

@@ -1,0 +1,33 @@
+453. Minimum Moves to Equal Array Elements
+Given an integer array nums of size n, return the minimum number of moves required to make all array elements equal.
+[1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4] so output = 3
+In one move, you can increment n - 1 elements of the array by 1.
+public class Solution {
+    public int minMoves(int[] nums) {
+        if (nums.length == 0) return 0;
+        int min = nums[0];
+        for (int n : nums) min = Math.min(min, n);
+        int res = 0;
+        for (int n : nums) res += n - min;
+        return res;
+    }
+}
+
+//Minimum Moves to Equal Array Elements 2
+Given an integer array nums of size n, return the minimum number of moves required to make all array elements equal.
+In one move, you can increment or decrement an element of the array by 1.
+[1,2,3]  =>  [2,2,3]  =>  [2,2,2]  output  2
+class Solution {
+    public int minMoves2(int[] nums) {
+        Arrays.sort(nums);
+
+        int mid = nums[nums.length / 2];
+        int count = 0;
+        for (int num : nums) {
+            count += Math.abs(num - mid);
+        }
+        return count;
+    }
+}
+
+

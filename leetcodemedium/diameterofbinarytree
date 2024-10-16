@@ -1,0 +1,14 @@
+//dia of binary tree
+
+  dia = 0
+  main(){
+    calc(root);
+    return dia;
+  }
+  int calc(TreeNode root){
+    if root==null return 0;
+    int left = calc(root.left);
+    int right = calc(root.right);
+    dia = Math.max(dia,left+right); // diameter of binary tree
+    return 1+Math.max(left,right);//height of binary tree
+  }

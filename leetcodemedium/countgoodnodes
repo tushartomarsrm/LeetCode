@@ -1,0 +1,20 @@
+/*Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
+Return the number of good nodes in the binary tree.*/
+class Solution {
+    public int goodNodes(TreeNode root) {
+        int[] ans = new int[1];
+        solve(root, root.val, ans);
+        return ans[0];
+    }
+    private void solve(TreeNode node, int max, int[] ans) {
+        if (node == null) {
+            return;
+        }
+        if (node.val >= max) {
+            ans[0]++;
+            max = node.val;
+        }
+        solve(node.left, max, ans);
+        solve(node.right, max, ans);
+    }
+}

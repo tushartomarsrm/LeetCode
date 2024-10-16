@@ -1,0 +1,17 @@
+class Solution {
+    public int reverse(int x) {
+        long rev = 0;
+        boolean sign = x<0 ? true:false;
+        if (sign) x*=-1;
+        while (x>0){
+            int mod = x%10;
+            rev=rev*10+mod;
+            x/=10;
+        }
+        if (rev >= (long)Integer.MIN_VALUE && rev<=(long)Integer.MAX_VALUE){
+            if (sign) rev*=-1;
+            return (int)rev; 
+        }
+        return 0;
+    }
+}

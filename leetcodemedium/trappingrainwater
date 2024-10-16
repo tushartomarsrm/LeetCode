@@ -1,0 +1,18 @@
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int[] dpLeft = new int[n];
+        int[] dpRight = new int[n];
+        dpLeft[0] = height[0];
+        dpRight[n - 1] = height[n - 1];
+        for (int i = 1; i < n; i++) {
+            dpLeft[i] = Math.max(dpLeft[i - 1], height[i]);
+            dpRight[n - i - 1] = Math.max(dpRight[n - i], height[n - i - 1]);
+        }
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result += Math.min(dpLeft[i], dpRight[i]) - height[i];
+        }
+        return result;
+    }
+}

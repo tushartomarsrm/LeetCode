@@ -1,0 +1,68 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class SnakeAndLadder {
+    private int playerPosition;
+    private int[] snakeHead;
+    private int[] snakeTail;
+    private int[] ladderStart;
+    private int[] ladderEnd;
+
+    public SnakeAndLadder(int numSnakes, int numLadders) {
+        playerPosition = 0;
+        snakeHead = new int[numSnakes];
+        snakeTail = new int[numSnakes];
+        ladderStart = new int[numLadders];
+        ladderEnd = new int[numLadders];
+        initializeSnakesAndLadders();
+    }
+
+    private void initializeSnakesAndLadders() {
+        Random rand = new Random();
+        for (int i = 0; i < snakeHead.length; i++) {
+            snakeHead[i] = rand.nextInt(100) + 1;
+            snakeTail[i] = rand.nextInt(snakeHead[i] - 1) + 1;
+        }
+        for (int i = 0; i < ladderStart.length; i++) {
+            ladderStart[i] = rand.nextInt(100) + 1;
+            ladderEnd[i] = rand.nextInt(101 - ladderStart[i]) + ladderStart[i];
+        }
+    }
+
+    public void playGame() {
+        Scanner scanner = new Scanner(System.in);
+        while (playerPosition < 100) {
+            System.out.println("Current position: " + playerPosition);
+            System.out.println("Enter a number to roll the dice:");
+            int roll = scanner.nextInt();
+            if (roll < 1 || roll > 6) {
+                System.out.println("Invalid input. Please enter a number between 1 and 6.");
+                continue;
+            }
+            playerPosition += roll;
+            if (playerPosition > 100) {
+                playerPosition -= roll;
+                System.out.println("Cannot move beyond 100. Try again.");
+                continue;
+            }
+            for (int i = 0; i < snakeHead.length; i++) {
+                if (playerPosition == snakeHead[i]) {
+                    System.out.println("Bitten by a snake! Moving from " + playerPosition + " to " + snakeTail[i]);
+                    playerPosition = snakeTail[i];
+                }
+            }
+            for (int i = 0; i < ladderStart.length; i++) {
+                if (playerPosition == ladderStart[i]) {
+                    System.out.println("Climbed a ladder! Moving from " + playerPosition + " to " + ladderEnd[i]);
+                    playerPosition = ladderEnd[i];
+                }
+            }
+        }
+        System.out.println("Congratulations! You reached 100.");
+    }
+
+    public static void main(String[] args) {
+        SnakeAndLadder game = new SnakeAndLadder(5, 5);
+        game.playGame();
+    }
+}

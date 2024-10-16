@@ -1,0 +1,6 @@
+if nums[m]>nums[R]:
+    L=m+1
+else R=m
+
+   2 3 4 5 6
+        

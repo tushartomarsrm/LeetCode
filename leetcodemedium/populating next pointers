@@ -1,0 +1,25 @@
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition: (note 2nd mai imperfect bhi hai wo nhi krra)
+
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+    public Node connect(Node root) {
+        if (root == null) return root;
+        connectNodes(root.left, root.right);
+        return root;
+    }
+    void connectNodes(Node leftRoot, Node rightRoot) {
+        if (leftRoot == null || rightRoot == null) return;
+		// connect the nodes in the current "box" of the "ternary tree node"
+        leftRoot.next = rightRoot;
+		// recursively do this for each child "box"
+        connectNodes(leftRoot.left, leftRoot.right);
+        connectNodes(leftRoot.right, rightRoot.left);
+        connectNodes(rightRoot.left, rightRoot.right);
+    }
+

@@ -1,0 +1,34 @@
+Input: numCourses = 2, prerequisites = [[1,0]]
+Output: true
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0. So it is possible.
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] visited = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (!dfs(i, visited, prerequisites)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean dfs(int i, int[] visited, int[][] prerequisites) {
+        if (visited[i] == 1) {
+            return false;
+        }
+        if (visited[i] == 2) {
+            return true;
+        }
+        visited[i] = 1;
+        for (int[] prereq : prerequisites) {
+            if (prereq[0] == i) {
+                if (!dfs(prereq[1], visited, prerequisites)) {
+                    return false;
+                }
+            }
+        }
+        visited[i] = 2;
+        return true;
+    }
+}

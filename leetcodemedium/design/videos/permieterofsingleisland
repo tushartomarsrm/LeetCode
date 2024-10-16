@@ -1,0 +1,31 @@
+//Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+Output: 16
+Explanation: The perimeter is the 16 yellow stripes in the image above.
+
+ for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    // check for i-1, j and i, j-1
+                    ans += 4;
+                    if (i > 0 && grid[i - 1][j] == 1) ans -= 2;
+                    if (j > 0 && grid[i][j - 1] == 1) ans -= 2;
+                }
+            }
+        }
+        return ans;
+
+//Input: timeSeries = [1,4], duration = 2
+Output: 4
+Explanation: Teemo's attacks on Ashe go as follows:
+- At second 1, Teemo attacks, and Ashe is poisoned for seconds 1 and 2.
+- At second 4, Teemo attacks, and Ashe is poisoned for seconds 4 and 5.
+Ashe is poisoned for seconds 1, 2, 4, and 5, which is 4 seconds in total.
+
+in this ans+=min(4-1,2)
+after loop:
+ans+=duration //for the last remaining element
+
+
+
+//575. Distribute Candies : alice has n candies 
+return Math.min(candyType.length / 2, uniqueCandies.size());

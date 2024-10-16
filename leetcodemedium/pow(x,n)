@@ -1,0 +1,22 @@
+Input: x = 2.00000, n = 10
+Output: 1024.00000
+public class Solution {
+    public double MyPow(double x, int n) {
+        double ans = 1;
+        long absN = Math.abs((long)n); //-2^31 <= n <= 2^31-1
+        while(absN > 0) {
+            if((absN&1)==1) ans *= x; //means if odd
+            absN >>= 1; //divide by 2
+            x *= x;
+        }
+        return n < 0 ?  1/ans : ans;
+    }
+}
+
+ans      absN           x 
+1        10              2
+1        5               4
+4        2               16
+4        1               256
+1024     0               256*256
+

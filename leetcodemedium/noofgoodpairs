@@ -1,0 +1,19 @@
+//1512 Given an array of integers nums, return the number of good pairs.
+// A pair (i, j) is called good if nums[i] == nums[j] and i < j.
+import java.util.HashMap;
+import java.util.Map;
+class Solution {
+    public int numIdenticalPairs(int[] nums) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        int count = 0;
+        for (int num : nums) {
+            int val = frequencyMap.getOrDefault(num, 0);//each is contributing to previous
+            count += val;
+            frequencyMap.put(num,val + 1);
+        }
+        return count;
+    }
+}
+        
+
+

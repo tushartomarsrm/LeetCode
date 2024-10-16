@@ -1,0 +1,22 @@
+//exapmle - [4,5,6,2,1] -> [4,6,1,2,5]
+public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        int left = n - 2;
+        int right = n - 1;
+        int temp = n - 2;
+        while (temp >= 0) {
+            if (nums[temp] < nums[temp + 1]) {
+                break;
+            }
+            temp--;
+        }
+        //temp = 1 (i.e = 5)
+        if (temp >= 0) {
+            while (nums[right] <= nums[temp]) {
+                right--;
+            }
+            //right = 3
+            swap(nums, temp, right);
+        }
+        reverse(nums, temp + 1, n - 1);
+    }

@@ -1,0 +1,30 @@
+public class Vector2D {
+    private int[][] vec;
+    private int row, col;
+
+    public Vector2D(int[][] vec) {
+        this.vec = vec;
+        row = 0;
+        col = 0;
+    }
+
+    public int next() {
+        if (hasNext()) {
+            int val = vec[row][col];
+            col++;
+            if (col == vec[row].length) {
+                row++;
+                col = 0;
+            }
+            return val;
+        }
+        return -1;
+    }
+
+    public boolean hasNext() {
+        while (row < vec.length && col == vec[row].length) {
+            row++;
+        }
+        return row < vec.length;
+    }
+}

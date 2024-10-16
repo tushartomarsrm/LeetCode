@@ -1,0 +1,6 @@
+if (c>m) {m=c;}
+if (c<0) c=0;
+
+//in spiral matric use 4 pointers top bottom left right   and len>0 in main while loop
+
+//

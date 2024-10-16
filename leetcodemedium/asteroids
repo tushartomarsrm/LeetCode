@@ -1,0 +1,42 @@
+//Input: asteroids = [5,10,-5]
+// Output: [5,10]
+// Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        for (int a : asteroids) {
+            if (a > 0) {stack.push(a);} 
+            else {
+                while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -a) {stack.pop();}
+                if (stack.isEmpty() || stack.peek() < 0)  {stack.push(a);}
+                if (stack.peek() == -a) {stack.pop();}
+            }
+        }
+        int[] res = new int[stack.size()];
+        int i = stack.size() - 1;
+        while(!stack.isEmpty()) {res[i--] = stack.pop();}
+        return res;   
+    }
+}
+
+
+
+Input: mass = 10, asteroids = [3,9,19,5,21]
+Output: true
+Input: mass = 5, asteroids = [4,9,23,4]
+Output: false
+//2126. Destroying Asteroids
+class Solution {
+    public boolean asteroidsDestroyed(int mass, int[] asteroids) {
+        Arrays.sort(asteroids);
+        long sum = mass; 
+        for(int i = 0; i < asteroids.length; i++){
+            if(sum >= asteroids[i]){ 
+                sum += asteroids[i];
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+}

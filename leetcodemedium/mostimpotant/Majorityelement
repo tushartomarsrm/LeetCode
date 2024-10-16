@@ -1,0 +1,19 @@
+//number which appears more than n/2 times
+class Solution {
+    public int majorityElement(int[] nums) {
+         int count = 0;
+         int candidate = nums[0];
+         for (int num : nums) {
+             if (count == 0) {
+                 candidate = num;
+             }
+             count += (num == candidate) ? 1 : -1;
+         }
+         return candidate;
+     }
+ }
+upar wala optimal hai
+ or 
+
+ Array.sort();
+ return arr[n/2]
